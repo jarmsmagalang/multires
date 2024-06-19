@@ -1,7 +1,7 @@
 import numpy as np
 from .increase_resolution import increase_resolution
 
-def smra(v, D, r, x0, eps, kmax = 30, kmin = 25, trajectory = False):
+def smra(v, D, r, x0, eps, kmax = 30, kmin = 25, tmax_in = 10**5, trajectory = False):
     """
     Function to either generate a first passage time or a Brownian trajectory starting from x0 up to the first crossing below 0 following the standard MRA.
 
@@ -21,6 +21,8 @@ def smra(v, D, r, x0, eps, kmax = 30, kmin = 25, trajectory = False):
         Simulation parameter to determine the maximum resolution k considered before stopping the simulation. The default is 30.
     kmin : Integer, optional
         Simulation parameter to determine the minimum resolution k considered before computing the next resetting interval given that the stopping condition has not been reached prior. The default is 25.
+    tmax_in : Float, optional
+        The time at the endpoint of the Brownian trajectory when r = 0. The default is 10**5.
     trajectory : Boolean, optional
         If true, function returns the full arrays of position and time of the trajectory. If false, function returns only the first passage time. The default is False.
 
@@ -52,7 +54,7 @@ def smra(v, D, r, x0, eps, kmax = 30, kmin = 25, trajectory = False):
     
     #Generate the first reset time
     if r == 0:
-        tmax = 10**100
+        tmax = tmax_in
     else:
         tmax = np.random.exponential(1/r)
     

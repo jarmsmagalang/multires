@@ -2,7 +2,7 @@ import numpy as np
 from .increase_resolution import increase_resolution
 from .euler import euler
 
-def hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, trajectory = False):
+def hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, tmax_in = 10**5, trajectory = False):
     """
     Function to either generate a first passage time or a Brownian trajectory starting from x0 up to the first crossing below 0 following the hybrid MRA.
 
@@ -24,6 +24,8 @@ def hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, trajectory = Fal
         Position threshold, the multiresolution algorithm will begin to compute if the Euler trajectory is below this threshold. The default is 0.1.
     kmax : Integer, optional
         Simulation parameter to determine the maximum resolution k considered before stopping the simulation. The default is 30.
+    tmax_in : Float, optional
+        The time at the endpoint of the Brownian trajectory when r = 0. The default is 10**5.
     trajectory : Boolean, optional
         If true, function returns the full arrays of position and time of the trajectory. If false, function returns only the first passage time. The default is False.
 

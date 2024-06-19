@@ -1,6 +1,6 @@
 import numpy as np
 
-def euler(v,D,r,eul_dt,x0,t0):
+def euler(v,D,r,eul_dt,x0,t0, tmax_in = 10**5):
     """
     Generate a trajectory with resetting using the Euler-Maruyama algorithm
 
@@ -18,6 +18,8 @@ def euler(v,D,r,eul_dt,x0,t0):
         Initial position. Must be from 0 <= x0 < 1
     t0 : Float
         Initial time.
+    tmax_in : Float, optional
+        The time at the endpoint of the Brownian trajectory when r = 0. The default is 10**5.
 
     Returns
     -------
@@ -35,7 +37,7 @@ def euler(v,D,r,eul_dt,x0,t0):
     
     #Generate the first resetting itme
     if r == 0:
-        tmax = 10**100
+        tmax = tmax_in
     else:
         tmax = np.random.exponential(1/r)
     
