@@ -18,7 +18,7 @@ By default, either simulation scheme will produce a first passage time, rather t
 ## SMRA
 The `smra` function has the following syntax:
 ```
-smra(v, D, r, x0, eps, kmax = 30, kmin = 25, trajectory = False)
+smra(v, D, r, x0, eps, kmax = 30, kmin = 25, tmax_in = 10**5, trajectory = False)
 ```
 Here is a description of each argument:
 - `v` : Float. Drift constant.
@@ -28,6 +28,7 @@ Here is a description of each argument:
 - `eps` : Float. Error threshold. Must be positive.
 - `kmax` : Integer, optional. Simulation parameter to determine the maximum resolution $k$ considered before stopping the simulation. The default is 30.
 - `kmin` : Integer, optional. Simulation parameter to determine the minimum resolution $k$ considered before computing the next resetting interval given that the stopping condition has not been reached prior. The default is 25.
+- `tmax_in` : The time at the endpoint of the Brownian trajectory when `r = 0`. The default is 10**5.
 - `trajectory` : Boolean, optional. If `True`, function returns the full arrays of position and time of the trajectory. If `False`, function returns only the first passage time. The default is `False`.
 
 Running the function will yield either three or four outputs, depending on the argument `trajectory`:
@@ -80,7 +81,7 @@ True
 ## HMRA
 The `hmra` function has the following syntax:
 ```
-hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, trajectory = False)
+hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, tmax_in = 10**5, trajectory = False)
 ```
 Here is a description of each argument:
 - `v` : Float. Drift constant.
@@ -91,6 +92,7 @@ Here is a description of each argument:
 - `eul_dt` : Float. Euler-Maruyama simulation timestep.
 - `mul_thresh` : Float, optional. Position threshold, the multiresolution algorithm will begin to compute if the Euler trajectory is below this threshold. The default is 0.1.
 - `kmax` : Integer, optional. Simulation parameter to determine the maximum resolution $k$ considered before stopping the simulation. The default is 30.
+- `tmax_in` : The time at the endpoint of the Brownian trajectory when `r = 0`. The default is 10**5.
 - `trajectory` : Boolean, optional. If `True`, function returns the full arrays of position and time of the trajectory. If `False`, function returns only the first passage time. The default is `False`.
 
 Running the function will yield either three or four outputs, depending on the argument `trajectory`:
