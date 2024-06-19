@@ -4,9 +4,9 @@ This package is an implementation of the standard and hybrid multiresolution alg
 
 # Installation
 
-Install the package from TestPyPI:
+Install the package from PyPI:
 ```
-pip install -i https://test.pypi.org/simple/ multires
+pip install multires
 ```
 # Usage
 To run a simulation, begin by first choosing the scheme that you want:
