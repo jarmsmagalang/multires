@@ -12,7 +12,7 @@ def smra(v, D, r, x0, eps, kmax = 30, kmin = 25, trajectory = False):
     D : Float
         Diffusion constant. Must be positive.
     r : Float
-        Resetting constant. Must be positive.
+        Resetting constant. Must be non-negative.
     x0 : Float
         Initial position. Must be from 0 <= x0 < 1
     eps : Float
@@ -51,7 +51,10 @@ def smra(v, D, r, x0, eps, kmax = 30, kmin = 25, trajectory = False):
     t00 = 0.0
     
     #Generate the first reset time
-    tmax = np.random.exponential(1/r)
+    if r == 0:
+        tmax = 10**100
+    else:
+        tmax = np.random.exponential(1/r)
     
     T = np.nan
     

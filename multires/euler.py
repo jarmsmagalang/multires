@@ -11,7 +11,7 @@ def euler(v,D,r,eul_dt,x0,t0):
     D : Float
         Diffusion constant. Must be positive.
     r : Float
-        Resetting constant. Must be positive.
+        Resetting constant. Must be non-negative.
     eul_dt : Float
         Simulation timestep.
     x0 : Float
@@ -34,7 +34,10 @@ def euler(v,D,r,eul_dt,x0,t0):
     eul_t = [t0]
     
     #Generate the first resetting itme
-    tmax = np.random.exponential(1/r)
+    if r == 0:
+        tmax = 10**100
+    else:
+        tmax = np.random.exponential(1/r)
     
     while current_x >= 0:
         

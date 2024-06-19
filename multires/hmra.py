@@ -13,7 +13,7 @@ def hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, trajectory = Fal
     D : Float
         Diffusion constant. Must be positive.
     r : Float
-        Resetting constant. Must be positive.
+        Resetting constant. Must be non-negative.
     x0 : Float
         Initial position. Must be from 0 <= x0 < 1
     eps : Float
