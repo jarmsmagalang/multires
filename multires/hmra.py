@@ -70,9 +70,8 @@ def hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, trajectory = Fal
     
     #Begin the multiresolution algorithm for the segments below the threshold
     k = 0
-    Tvals = [eul_fpt]
     
-    fpt = np.nan
+    T = eul_fpt
     has_reached_eps = True
     
     while True:
@@ -87,13 +86,13 @@ def hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, trajectory = Fal
         #Iterate over all Euler-Maruyama segments
         for i in np.arange(0, len(xk_arr)):
         
-            x_arr = xk_arr[i]
-            t_arr = tk_arr[i]
+            xi_arr = xk_arr[i]
+            ti_arr = tk_arr[i]
             #Increase resolution of each Euler-Maruyama segment
-            x_arr, t_arr = increase_resolution(x_arr, t_arr, D, k, eul_dt)
+            xi_arr, ti_arr = increase_resolution(xi_arr, ti_arr, D, k, eul_dt)
             
-            xk_arrs.append(x_arr)
-            tk_arrs.append(t_arr)
+            xk_arrs.append(xi_arr)
+            tk_arrs.append(ti_arr)
         
         x_arrs.append(xk_arrs)
         t_arrs.append(tk_arrs)
@@ -108,16 +107,13 @@ def hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, trajectory = Fal
         
             T_ind = abscheck[0][0]
             T = tktraj[T_ind]
-            Tvals.append(T)
-                
+
             h = eul_dt/(2**(k))
             #Check if reflected trajectory has reached the stopping condition (Equation 4.10)
             if h < eps:
-               fpt = Tvals[-1]
                break
             #If stopping condition has not been reached up until kmax, simulation ends with a failure
             elif k >= kmax:
-                fpt = Tvals[-1]
                 has_reached_eps = False
                 break
     
@@ -133,9 +129,9 @@ def hmra(v, D, r, x0, eps, eul_dt, mul_thresh = 0.1, kmax = 30, trajectory = Fal
             x_insert = xk_arrs[ith][:-1]
             xtraj[th_ind] = x_insert
         
-        xtraj_final = np.hstack(xtraj)
-        ttraj_final = np.hstack(ttraj)
+        x_arr = np.hstack(xtraj)
+        t_arr = np.hstack(ttraj)
         
-        return xtraj_final, ttraj_final, k, has_reached_eps
+        return x_arr, t_arr, k, has_reached_eps
     else:
-        return fpt, k, has_reached_eps
+        return T, k, has_reached_eps
