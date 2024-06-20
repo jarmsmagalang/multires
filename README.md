@@ -1,6 +1,7 @@
+
 # Multiresolution Algorithm
 
-This package is an implementation of the standard and hybrid multiresolution algorithm as proposed in "Analytic and Monte Carlo Approximations to the Distribution of the First Passage Time of the Drifted Diffusion with Stochastic Resetting and Mixed Boundary Conditions" by J. Magalang, R. Turin, et. al. 
+This package is an implementation of the standard and hybrid multiresolution algorithm as proposed in [Computation of the Distribution of the Absorption Time of the Drifted Diffusion with Stochastic Resetting and Mixed Boundary Conditions](https://arxiv.org/abs/2311.03939) by Turin, Magalang, Aguilar, Colombani, Sanchez-Taltavull, and Gatto[^1]
 
 # Installation
 
@@ -145,7 +146,8 @@ True
 ## Auxiliary Functions
 
 This package also contains auxiliary functions:
-1. `increase_resolution` increases the resolution of a trajectory from level $k-1$ to $k$ given that the input array has length $2^{k-1}+1$, following Equation 4.3 of Magalang, Turin, et. al.
+1. `increase_resolution` increases the resolution of a trajectory from level $k-1$ to $k$ given that the input array has length $2^{k-1}+1$.
 2. `euler` is an implementation of the Euler-Maruyama algorithm which outputs a full trajectory and is required for the HMRA.
 
+[^1]: Turin, R., Magalang, J., Aguilar, J., Colombani, L., Sanchez-Taltavull, D., & Gatto, R. (2024).  _Computation of the distribution of the absorption time of the drifted diffusion with stochastic resetting and mixed boundary conditions_  (arXiv:2311.03939). arXiv. https://doi.org/10.48550/arXiv.2311.03939
 > Written with [StackEdit](https://stackedit.io/).
